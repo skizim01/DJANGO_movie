@@ -3,56 +3,51 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.base import View
 
-from .models import Movie, Category, Actor, Genre
-from .forms import ReviewForm
+from .models import Students, Category, Specialty,Techers
 
 
-class GenreYear:
-    """Жанры и года выхода фильмов"""
-    def get_genres(self):
-        return Genre.objects.all()
-
-    def get_years(self):
-        return Movie.objects.filter(draft=False).values("year")
 
 
-class MovieView(GenreYear, ListView):
+class GenreSpecTech:
+
+    def get_category(self):
+        return Category.objects.all()
+
+    def get_spec(self):
+        return Specialty.objects.all()
+
+    def get_tech(self):
+        return Techers.objects.all()
+
+
+class StudentsView(GenreSpecTech, ListView):
     """Список фильмов"""
-    model = Movie
-    queryset = Movie.objects.filter(draft=False)
+    model = Students
+    queryset = Students.objects.all()
 
 
-class MovieDetailView(GenreYear, DetailView):
-    """Полное описание фильма"""
-    model = Movie
-    slug_field = "url"
-
-
-
-class ActorView(GenreYear, DetailView):
-    """Вывод информации о актере"""
-    model = Actor
-    template_name = 'movies/actor.html'
-    slug_field = "name"
-
-
-class FilterMoviesView(GenreYear, ListView):
+#
+class FilterMoviesView(GenreSpecTech, ListView):
     """Фильтр фильмов"""
+
     def get_queryset(self):
-        queryset = Movie.objects.filter(
-            Q(year__in=self.request.GET.getlist("year")) |
-            Q(genres__in=self.request.GET.getlist("genre"))
+        queryset = Students.objects.filter(
+            Q(category__in=self.request.GET.getlist("category")) |
+            Q(specialty__in=self.request.GET.getlist("specialty"))
         )
         return queryset
 
 
-class AddReview(View):
+class AddStudent(View):
 
-    def post(self, request, pk):
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.movie_id = pk
-            form.save()
-        return redirect('/')
+    def post(self, request):
+        if request.method == "POST":
+            name = request.POST["name"]
+            category = Category.objects.get(name=request.POST["category"])
+            specialty = Specialty.objects.get(name=request.POST["specialty"])
+            expectation = request.POST["expectation"]
+            Students.objects.get_or_create(name=name, category=category,
+                                           specialty=specialty,  expectation=expectation,
+                                           age=12)
+            return redirect("/")
 

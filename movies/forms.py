@@ -1,9 +1,10 @@
 from django import forms
 
-from .models import Reviews
 
 
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model = Reviews
-        fields = ("name", "email", "text")
+
+class StudentsForm(forms.Form):
+    name = forms.CharField(label='name')
+    category = forms.CharField(label='category')
+    expectation = forms.CharField(label='expectation')
+    specialty = forms.CharField(label='specialty')

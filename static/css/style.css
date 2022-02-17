@@ -459,6 +459,9 @@ li > a:only-child:after {
     text-shadow: 2px 5px 3px rgba(0, 0, 0, 0.06);
 }
 
+
+
+
 .ban-buttons a {
     background: #fff;
     padding: 11px 31px;
@@ -571,7 +574,45 @@ ul.events-icons.new-inf img {
     -ms-transition: 2s all;
     -o-transition: 2s all;
 }
-
+.box123,
+.box123 * {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	box-sizing: border-box;
+}
+.box123 {
+	position: relative;
+	background-color: #E6E6E6;
+	border-radius: 4px;
+}
+.box123 select {
+	font-size: 1rem;
+	font-weight: normal;
+	max-width: 100%;
+	padding: 8px 24px 8px 10px;
+	border: none;
+	background-color: transparent;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+	appearance: none;
+}
+.box123 select:active, .box123 select:focus {
+	outline: none;
+	box-shadow: none;
+}
+.box123:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	width: 0;
+	height: 0;
+	margin-top: -2px;
+	border-top: 5px solid #aaa;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
 .bottom-gd:hover.f1 span,
 .bottom-gd2-active span {
     color: #fff;

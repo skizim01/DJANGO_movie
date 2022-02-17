@@ -1,5 +1,5 @@
 from django import template
-from movies.models import Category, Movie
+from movies.models import Category
 
 
 register = template.Library()
@@ -9,9 +9,9 @@ register = template.Library()
 def get_categories():
     """Вывод всех категорий"""
     return Category.objects.all()
-
-
-@register.inclusion_tag('movies/tags/last_movie.html')
-def get_last_movies(count=5):
-    movies = Movie.objects.order_by("id")[:count]
-    return {"last_movies": movies}
+#
+#
+# @register.inclusion_tag('movies/tags/last_movie.html')
+# def get_last_movies(count=5):
+#     movies = Movie.objects.order_by("id")[:count]
+#     return {"last_movies": movies}
