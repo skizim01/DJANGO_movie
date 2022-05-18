@@ -1,0 +1,71 @@
+{% extends "movies/base.html" %}
+{% load movie_tag %}
+<link rel="stylesheet" href="./../../static/css/selector.css">
+
+{% block movie %}
+    <div style="display: table-row">
+        <div>
+            <table border="2px">
+                <tr>
+                    <td>НОМЕР</td>
+                     <td>СЕРІЯ</td>
+                <td>ВОДОТОНАЖНІСТЬ</td>
+
+                </tr>
+                {% for datas in data %}
+
+                    <tr width=120>
+                        <td width=200 height="40px">{{ datas.id }}</td>
+                        <td width=200> {{ datas.name }}</td>
+                    <td width=200>{{ datas.displacement }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <div style="display: table-row">
+            <h2>Фільтр</h2>
+            <form action="{% url 'filter' pk%}" method="get" style="display: table-row">
+                <div class="left-side my-4">
+                    <h3 class="sear-head editContent">Країна виробник</h3>
+                    <ul class="w3layouts-box-list">
+                        <div>
+                            <label>
+                                <select name="name">
+                                    {% for e in fullData %}
+
+                                        <option value='{{ e.country.name }}@{{ e.country.soldat }}' {% if order.food_status == id %} selected="selected"{% endif %}>Назва країни;{{ e.country.name }}, {{ e.country.soldat }} тисяч військових</option>
+                                    {% endfor %}
+
+                                </select>
+                            </label>
+                        </div>
+                    </ul>
+                    <h3 class="sear-head editContent">Рік спуску на воду</h3>
+                    <ul class="w3layouts-box-list">
+
+                        <div>
+                            <label>
+                                <select name="2">
+                                    {% for e in fullData %}
+                                        <option value='{{ e.year }}'>{{ e.year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                        </div>
+                    </ul>
+                </div>
+                <button type="submit">Знайти</button>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

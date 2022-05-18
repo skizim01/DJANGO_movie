@@ -1,0 +1,149 @@
+{% extends "movies/base.html" %}
+{% load movie_tag %}
+<link rel="stylesheet" href="./../../static/css/selector.css">
+
+{% block movie %}
+    <div style="display: table-row">
+        <div>
+        <table border="2px">
+            <tr>
+                <td>НОМЕР</td>
+                <td>НАЗВА</td>
+                <td>КІДЬКІСТЬ ВІЙСЬКОВИХ В ТИСЯЧАХ</td>
+                <td>ВИТРАТИ НА ОБОРОНУ В МІЛЬЙОНАХ ДОЛАРІВ</td>
+                <td>ВИТРАТИ НА ОБОРОНУ В ВІДСОТКАХ ВВП</td>
+                <td>КІЛЬКІСТЬ СОЛДАТ НА ТИСЯЧУ НАСЕЛЕННЯК</td>
+
+            </tr>
+            {% for datas in data %}
+
+                <tr width=120>
+                    <td width=200 height="40px">{{ datas.id }}</td>
+                    <td width=200> {{ datas.name }}</td>
+                    <td width=200>{{ datas.soldat }}</td>
+                    <td width=200>{{ datas.money }}</td>
+                    <td width=200>{{ datas.m_vvp }}</td>
+                    <td width=200>{{ datas.s_1000 }}</td>
+                </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+    <div  style="display: table-row" >
+    <h2>Фільтр</h2>
+        <form action="{% url 'filter_Country' pk %}" method="get"  style="display: table-row">
+            <div class="left-side my-4">
+                <h3 class="sear-head editContent">ВИТРАТИ НА ОБОРОНУ В ВІДСОТКАХ ВВП</h3>
+                <ul class="w3layouts-box-list">
+                    <div>
+                        <label>
+                            <select name="1Element">
+                                {% for e in fullData %}
+                                    <option value='{{ e.m_vvp }}' {% if order.food_status == id %} selected="selected"{% endif %}>{{ e.m_vvp }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </ul>
+                <h3 class="sear-head editContent">КІЛЬКІСТЬ СОЛДАТ НА ТИСЯЧУ НАСЕЛЕННЯК</h3>
+                <ul class="w3layouts-box-list">
+
+                    <div>
+                        <label>
+                            <select name="2Element">
+                                {% for e in fullData %}
+                                    <option value='{{ e.s_1000 }} '>{{ e.s_1000 }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </ul>
+            </div>
+            <button type="submit">Знайти</button>
+        </form>
+       <h2>Додати екземпляр</h2>
+        <form action="{% url 'add_Country' %}" method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group editContent">
+                <label for="contactcomment" class="editContent">
+               Назва країник
+                </label>
+                <input class="form-control border" rows="5" name="element1"
+                          id="contactcomment" required="">
+            </div>
+                    <div class="form-group editContent">
+                <label for="contactcomment" class="editContent">
+                    Кількість військових в тисячах
+                </label>
+                         <input class="form-control border" rows="5" name="element2"
+                          id="contactcomment" required="">
+            </div>
+                    <div class="form-group editContent">
+                <label for="contactcomment" class="editContent">
+                   Кількість військових кількіть військових на тисячу населення
+                </label>
+                <input class="form-control border" rows="5" name="element3"
+                          id="contactcomment" required="">
+            </div>
+             <div class="form-group editContent">
+                <label for="contactcomment" class="editContent">
+                 Витрати на оборону в мільйонах доларів
+                </label>
+                <input class="form-control border" rows="5" name="element4"
+                          id="contactcomment" required="">
+            </div>
+             <div class="form-group editContent">
+                <label for="contactcomment" class="editContent">
+                    Витрати на оборону в відсотках ВВП
+                </label>
+                <input class="form-control border" rows="5" name="element5"
+                          id="contactcomment" required="">
+            </div>
+
+            <button type="submit"
+                    class="mt-3 btn btn-success btn-block py-3">
+                Зареєструвати
+            </button>
+        </form>
+       <h2>Видалити</h2>
+        <form
+                action="{% url 'delete_Country'  %}"
+                method="post"  style="display: table-row">
+        {% csrf_token %}
+            <div class="left-side my-4">
+
+                <ul class="w3layouts-box-list">
+                    <div>
+                        <label>
+                            <select name="1Element">
+                                {% for e in fullData %}
+                                    <option value='{{e.soldat}}@{{ e.name }}' {% if order.food_status == id %} selected="selected"{% endif %}>НАЗВА:{{ e.name }}, Кількість військових в тисячах :{{ e.soldat }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </ul>
+
+            </div>
+            <button type="submit">Видалити</button>
+        </form>
+    <h3>Редагувати запис</h3>
+    <form action="{% url "change_c" %}"  method="get" target="_blank">
+     {% csrf_token %}
+        <select name="1">
+            {% for i in fullData %}
+                <option value="{{ i.id }}"> Назва країни: {{ i.name }}, {{ i.soldat }} тисяч солдат</option>
+            {% endfor%}
+        </select>
+    <button  type="submit">Редагувати</button>
+    </form>
+    </div>
+      </div>
+
+
+
+
+
+
+{% endblock %}

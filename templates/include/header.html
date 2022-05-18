@@ -1,6 +1,6 @@
 {% load static %}
 {% load movie_tag %}
-<div class="main-banner bg bg1" id="home" style="background-color: rgba(0, 0, 0, 0); margin-top: 0px;height: 200px; background-image: url({% static 'pexels-cottonbro-4778611.jpg' %});">
+<div class="main-banner bg bg1" id="home" style="background-color: rgba(0, 0, 0, 0); margin-top: 0px; max-height: 30% ; background-image: url({% static 'NATO.png' %});">
     <!-- header -->
     <header class="header">
         <div class="container-fluid px-lg-5">
@@ -16,13 +16,13 @@
                     <li class="active"><a href="/">Головна</a></li>
                     <li>
                         <!-- First Tier Drop Down -->
-                        <label for="drop-2" class="toggle">Дисципліни <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
-                        <a href="#">Дисципліни <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <label for="drop-2" class="toggle">Запити <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
+                        <a href="#">Запити <span class="fa fa-angle-down" aria-hidden="true"></span></a>
                         <input type="checkbox" id="drop-2">
                         <ul>
-                            {% get_categories as categories %}
+                            {% get_request as categories %}
                             {% for category in categories %}
-                                <li><a href="/">{{ category.name }}</a></li>
+                                <li><a href="/{{ category.id }}/">{{ category.text }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
@@ -36,7 +36,7 @@
     <!--/banner-->
     <div class="banner-info" style="color: rgba(71, 147, 255, 0.2);">
         <p class="editContent" style="color: rgba(71, 147, 255, 0.6);">Кращий сайт на django 3</p>
-        <h3 class="mb-4 editContent" style="color: rgba(71, 147, 255, 0.6);">Web-додаток для додаткових дисциплін</h3>
+        <h3 class="mb-4 editContent" style="color: black;">Web-додаток "Озброєння країн НАТО"</h3>
         <div class="ban-buttons">
 
 

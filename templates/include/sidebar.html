@@ -1,31 +1,31 @@
-{% load movie_tag %}
-<!--preference -->
-<form action="{% url 'filter' %}" method="get">
-    <div class="left-side my-4">
-        <h3 class="sear-head editContent">Дисципліни</h3>
-        <ul class="w3layouts-box-list">
-            {% for category in view.get_category %}
-                <li class="editContent">
-                    <input type="checkbox" class="checked" name="category" value="{{ category.id }}">
-                    <span class="span editContent">{{ category.name }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-      <h3 class="sear-head editContent">Спеціальності</h3>
-        <ul class="w3layouts-box-list">
-            {% for spec in view.get_spec %}
-                <li class="editContent">
-                    <input type="checkbox" class="checked" name="specialty" value="{{ spec.id }}">
-                    <span class="span editContent">{{ spec.name }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <!-- // preference -->
-    <!-- discounts -->
-
-      <button type="submit">Знайти</button>
-</form>
-<!-- //discounts -->
-<!-- reviews -->
+{#{% load movie_tag %}#}
+{#<!--preference -->#}
+{#<form action="{% url 'filter' %}" method="get">#}
+{#    <div class="left-side my-4">#}
+{#        <h3 class="sear-head editContent">Дисципліни</h3>#}
+{#        <ul class="w3layouts-box-list">#}
+{#            {% for category in view.get_category %}#}
+{#                <li class="editContent">#}
+{#                    <input type="checkbox" class="checked" name="category" value="{{ category.id }}">#}
+{#                    <span class="span editContent">{{ category.name }}</span>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#      <h3 class="sear-head editContent">Спеціальності</h3>#}
+{#        <ul class="w3layouts-box-list">#}
+{#            {% for spec in view.get_spec %}#}
+{#                <li class="editContent">#}
+{#                    <input type="checkbox" class="checked" name="specialty" value="{{ spec.id }}">#}
+{#                    <span class="span editContent">{{ spec.name }}</span>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#    <!-- // preference -->#}
+{#    <!-- discounts -->#}
+{##}
+{#      <button type="submit">Знайти</button>#}
+{#</form>#}
+{#<!-- //discounts -->#}
+{#<!-- reviews -->#}
 {#{% get_last_movies count=3 %}#}

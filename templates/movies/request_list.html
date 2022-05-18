@@ -1,0 +1,25 @@
+{% extends "movies/base.html" %}
+<link rel="stylesheet" href="./../../static/css/selector.css">
+
+{% block movie %}
+    <div class="left-ads-display col-lg-9">
+        <div class="row">
+
+            <div class="col-md-4 product-men">
+                {% for request in request_list %}
+                    <div>
+                        {{ request.text }}
+                    </div>
+                    <a href="{{ request.id }}"  >Робота з данним запитом</a>
+                {% endfor %}
+            </div>
+
+
+            <!--<div class="grid-img-right mt-4 text-right bg bg1" >
+                <span class="money editContent" >Flat 50% Off</span>
+                <a href="moviesingle.html" class="btn" >Now</a>
+            </div>-->
+        </div>
+
+    </div>
+{% endblock movie %}
